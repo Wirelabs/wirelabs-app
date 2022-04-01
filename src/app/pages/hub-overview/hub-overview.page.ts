@@ -122,7 +122,7 @@ export class HubOverviewPage implements OnInit {
   public addToFavourite(event: any) {
     this.hubService
       .updateHub(event.id, { favourite: !event.favourite })
-      .pipe()
+      .pipe(take(1))
       .subscribe(async (res) => {
         if (res.data) {
           const toast = await this.toastController.create({
