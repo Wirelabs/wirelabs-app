@@ -1,0 +1,33 @@
+<div *ngIf="(searchQuery && name.toUpperCase().includes(searchQuery.toUpperCase())) || searchQuery?.length === 0">
+    <div class="labels">
+        <ion-chip *ngFor="let label of labels" [style.color]="label.color" [style.border-color]="label.color" outline>
+            <ion-label>{{ label.name }}</ion-label>
+        </ion-chip>
+        <ion-chip *ngIf="labels?.length === 0 && !this.platform.is('mobile')" style="opacity: 0%;">
+            <ion-label>no labels</ion-label>
+        </ion-chip>
+    </div>
+    <ion-card class="ion-no-margin">
+        <ion-card-header class="ion-text-center ion-no-padding">
+            <ion-item class="ion-text-center ion-no-padding" lines="none">
+                <ion-button class="ion-float-start ion-margin-start" fill="clear" [color]="favourite ? 'warning' : 'dark'" (click)="addToFavourite()">
+                    <ion-icon [name]="favourite ? 'star-sharp' : 'star-outline'"></ion-icon>
+                </ion-button>
+                <ion-label class="ion-text-wrap ion-no-margin ion-margin-top ion-margin-bottom hub-title">
+                    {{ name }}
+                </ion-label>
+                <ion-button [id]="'settings-button-' + id" class="ion-float-end ion-margin-end" fill="clear" color="primary" (click)="openOptions()">
+                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content class="ion-text-center" (click)="goToDevices()">
+            <img class="ion-margin-top" [src]="'/assets/hub-case-' + status + '.svg'" width="50%">
+            <div class="ion-margin-top hub-status">
+                <span *ngIf="status !== 'updating'" [class]="status + '-circle circle' "></span>
+                <ion-spinner *ngIf="status === 'updating'" name="bubbles" color="warning"></ion-spinner>
+                <span>{{ status }}</span>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</div>

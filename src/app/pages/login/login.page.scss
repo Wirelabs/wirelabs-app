@@ -1,0 +1,157 @@
+.app-name {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+}
+
+a {
+    font-size: small;
+    color: var(--ion-color-primary);
+    text-decoration: none;
+}
+
+.qr-button {
+    font-size: 24px;
+    --border-radius: 50%;
+    width: 3.5em;
+    height: 3.5em;
+    margin: auto;
+}
+
+.login-button-row,
+.login-form {
+    margin-top: 3em;
+}
+
+ion-input {
+    --padding-start: 10px !important;
+}
+
+ion-note {
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 5px;
+}
+
+ion-item {
+    --border-color: var(--ion-color-border);
+    --border-radius: 10px;
+    --border-style: solid;
+    --border-width: 1px;
+}
+
+ion-item.ion-invalid.ion-touched {
+    --border-color: var(--ion-color-danger) !important;
+}
+
+ion-item.item-has-focus {
+    --border-color: var(--ion-color-primary) !important;
+}
+
+ion-item.ion-valid {
+    --border-color: var(--ion-color-success) !important;
+}
+
+ion-card {
+    border: var(--ion-color-border) 1px solid !important;
+    box-shadow: none;
+}
+
+@media(max-width: 960px) {
+    .side {
+        display: none;
+    }
+}
+
+ion-label,
+h1,
+p {
+    color: var(--ion-color-dark);
+}
+
+ion-label {
+    margin-left: 10px;
+}
+
+.input-field {
+    margin-top: 1em;
+}
+
+.square {
+    position: relative;
+    width: 50%;
+}
+
+.top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    border: 1px solid white;
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    border: 1px solid white;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    border: 1px solid white;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    border: 1px solid white;
+}
+
+.left-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30%;
+    border: 1px solid white;
+}
+
+.left-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 30%;
+    border: 1px solid white;
+}
+
+.right-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30%;
+    border: 1px solid white;
+}
+
+.right-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 30%;
+    border: 1px solid white;
+}
+
+.square::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+ion-slides {
+    height: 100%;
+}

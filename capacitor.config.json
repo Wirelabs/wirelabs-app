@@ -1,0 +1,14 @@
+{
+	"appId": "at.koch.linkup",
+	"appName": "Wirelabs",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+    "cordova": {
+        "android": {
+            "preferences": {
+                "android-minSdkVersion": "22",
+				"android-targetSdkVersion": "28"
+            }
+        }
+	}
+}

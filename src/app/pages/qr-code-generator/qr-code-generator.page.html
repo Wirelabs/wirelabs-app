@@ -1,0 +1,81 @@
+<ion-header [translucent]="false">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Create QR-Code</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                <h5 class="section ion-padding-bottom">Experation Date</h5>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                <ion-item lines="none">
+                    <ion-label>{{ selectedDate }}</ion-label>
+                    <ion-button fill="clear" color="primary" id="open-modal">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                <h5 class="section ion-padding-bottom">Permissions</h5>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                <ion-accordion-group [multiple]="true">
+                    <ion-accordion *ngFor="let hub of hubs" [value]="hub.id" [hidden]="hub.devices == 0">
+                        <ion-item slot="header">
+                            <ion-label [class]="hub.permission === true ? 'selected'  : 'normal'">{{ hub.name }}</ion-label>
+                        </ion-item>
+                        <ion-list slot="content">
+                            <ion-item class="ion-padding-start">
+                                <ion-label>All devices</ion-label>
+                                <ion-toggle [(ngModel)]="hub.allDeviceModel" (ionChange)="activateAll($event, hub._id)" color="primary"></ion-toggle>
+                            </ion-item>
+                            <ion-item *ngFor="let device of hub.devices" class="ion-padding-start">
+                                <ion-label>{{ device.name }}</ion-label>
+                                <ion-toggle [(ngModel)]="device.permission" (ionChange)="activateDevice($event, hub._id, device._id)"></ion-toggle>
+                            </ion-item>
+                        </ion-list>
+                    </ion-accordion>
+                </ion-accordion-group>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="!hubs" id="container">
+            <ion-row class="ion-text-center">
+                <ion-col offset-xs="0.5" size-xs="11">
+                    <ion-spinner name="crescent" style="height: 5em; width: 5em"></ion-spinner>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="11"> Fetching Hubs </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+
+    <ion-modal trigger="open-modal">
+        <ng-template>
+            <ion-content>
+                <div>
+                    <ion-datetime [min]="today" #datetime (ionChange)="changeDateTime(datetime.value)" showDefaultButtons>
+                    </ion-datetime>
+                </div>
+            </ion-content>
+        </ng-template>
+    </ion-modal>
+</ion-content>
+
+<ion-footer class="ion-text-center footer">
+    <ion-button class="footer-btn ion-margin" fill="outline" expand="block" (click)="createQRCode()">
+        <ion-icon name="qr-code-outline" slot="start"></ion-icon>Create QR-Code
+    </ion-button>
+</ion-footer>

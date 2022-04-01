@@ -1,0 +1,27 @@
+.circle {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+.active-circle {
+    background-color: var(--ion-color-success);
+}
+
+.updating-circle {
+    background-color: var(--ion-color-warning);
+}
+
+.offline-circle {
+    background-color: var(--ion-color-danger);
+}
+
+.config-circle {
+    background-color: rgb(136, 37, 156);
+}
+
+.disabled-opacity {
+    opacity: 100% !important;
+}

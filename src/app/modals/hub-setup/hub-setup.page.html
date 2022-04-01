@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button color="danger" fill="clear" (click)="disconnectFromWifi()">
+                <ion-icon name="close-outline" slot="start" color="danger"></ion-icon>cancel
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Network Setup</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-grid class="ion-no-margin" id="container">
+    <ion-row>
+        <ion-col offset-lg="4" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+
+            <form [formGroup]="credentialForm" (ngSubmit)="saveCredentials($event)">
+                <ion-card class="ion-no-margin">
+                    <ion-card-header class="ion-text-center">
+                        <ion-card-title class="ion-padding-bottom">Look for a hub looking like this</ion-card-title>
+                        <div class="ion-padding-bottom seperator"></div>
+                        <img src="/assets/hub-case-config.svg" class="ion-margin-top" alt="image not found" width="75%" />
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-item class="ion-no-padding ion-margin-top ion-margin-bottom" lines="none">
+                            <ion-input placeholder="hub name" value="My Awsome Hub" formControlName="name"></ion-input>
+                        </ion-item>
+                        <ion-item class="ion-no-padding ion-margin-top ion-margin-bottom" lines="none">
+                            <ion-input placeholder="wifi ssid" formControlName="ssid"></ion-input>
+                        </ion-item>
+                        <ion-item class="ion-no-padding ion-margin-top ion-margin-bottom" lines="none">
+                            <ion-input placeholder="wifi password" type="password" formControlName="password"></ion-input>
+                        </ion-item>
+                        <ion-button mode="ios" color="success" class="ion-margin-top ion-margin-bottom" (click)="saveCredentials([])" expand="block" fill="outline" [disabled]="credentialForm.valid">
+                            <ion-icon name="checkmark-outline" slot="start" color="success"></ion-icon>Save
+                        </ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </form>
+        </ion-col>
+    </ion-row>
+</ion-grid>

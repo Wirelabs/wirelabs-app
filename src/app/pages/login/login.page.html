@@ -1,0 +1,125 @@
+<ion-content scroll-y="true" [hidden]="scanActive" *ngIf="!firstActivation">
+    <ion-grid>
+        <img src="assets/login-side-screen.svg" class="side" style="position: absolute; top:0; left: 0; height: 100%;" />
+        <ion-row class="ion-margin-top">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11" class="ion-text-center">
+                <img src="/assets/icon/logo_2.png" width="75%" alt="logo_png" />
+            </ion-col>
+        </ion-row>
+        <form [formGroup]="loginForm" (ngSubmit)="login($event)">
+            <ion-row class="ion-margin-top input-field">
+                <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                    <ion-item class="ion-no-padding" lines="none">
+                        <ion-input type="email" formControlName="email" placeholder="your@email.com"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                    <ion-item class="ion-no-padding" lines="none">
+                        <ion-input type="Password" formControlName="password" placeholder="your password"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-margin-bottom">
+                <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                    <a class="ion-float-right" fill="clear" size="small" [routerLink]="['/forgot-password']">Forgot your password?</a
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row class="login-button-row">
+        <ion-col
+        offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11"
+          class="ion-no-margin"
+        >
+          <ion-button
+            expand="block"
+            fill="outline"
+            [disabled]="!loginForm.valid"
+            type="submit"
+            ><ion-icon name="log-in-outline" slot="start"></ion-icon>Log
+            In</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="ion-no-margin">
+      <ion-col
+      offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11"
+      >
+        <a class="ion-float-right" fill="clear" size="small"
+          >Don't have an account?</a
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top">
+      <ion-col
+      offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11"
+      >
+        <ion-button class="qr-button" expand="block" fill="outline" (click)="startScanner()">
+          <ion-icon name="qr-code-outline" color="primary"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-no-margin ion-text-center">
+      <ion-col
+      offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11"
+      >
+        <a fill="clear" size="small">Already have a smartup?</a>
+                    <p>{{ errorMessage }}</p>
+                    <p *ngFor="let network of networks">{{ network.SSID }}</p>
+                </ion-col>
+            </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-content scroll-y="false" [hidden]="!scanActive" style="--background: #00000000">
+    <div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; background-color: #00000000;">
+        <div style="width: 100%; height: 10%; background-color: white; position: absolute; top: 0; left: 0;">
+        </div>
+        <div class="square">
+            <div class="top-left"></div>
+            <div class="top-right"></div>
+
+            <div class="left-top"></div>
+            <div class="left-bottom"></div>
+
+            <div class="right-top"></div>
+            <div class="right-bottom"></div>
+
+            <div class="bottom-left"></div>
+            <div class="bottom-right"></div>
+        </div>
+        <div style="width: 100%; height: 10%; background-color: white; position: absolute; bottom: 0; left: 0;">
+        </div>
+    </div>
+</ion-content>
+
+<ion-content *ngIf="firstActivation">
+    <ion-slides pager="false">
+        <ion-slide>
+            <img src="assets/no-hub.svg" style="width: 6em;">
+        </ion-slide>
+        <ion-slide>
+
+            <img src="assets/hub-case-active.svg">
+        </ion-slide>
+        <ion-slide>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <h2>Ready to setup?</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-button fill="clear">
+                            Login
+                            <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

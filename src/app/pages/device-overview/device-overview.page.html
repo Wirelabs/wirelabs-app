@@ -1,0 +1,111 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Connected Devices</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="backToHubs()">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content forceOverscroll>
+    <ion-grid>
+        <ion-row *ngIf="devices">
+            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                <app-settings-panel (changeSearch)="changeSearchQuery($event)" (changeMode)="changeMode($event)"></app-settings-panel>
+            </ion-col>
+        </ion-row>
+
+        <div [ngSwitch]="mode" *ngIf="devices">
+            <div *ngSwitchCase="'grid'">
+                <ion-row *ngIf="favourites.length !== 0">
+                    <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                        <h2 class="section ion-padding-bottom">
+                            Favourites<span style="font-size: 16px; color: grey"> ({{ favourites.length }})</span>
+                        </h2>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="favourites.length !== 0">
+                    <ion-col *ngFor="let device of favourites; let i = index" [attr.offset-md]="i % 2 === 0 ? 1 : 0" size-md="5" offset-xs="0.5" size-xs="11">
+                        <app-grid-device [deviceId]="device._id" [hubId]="hubId" [name]="device.name" [type]="device.type" [labels]="device.labels" [icon]="device.icon" [searchQuery]="searchQuery" [favourite]="true" (addFavourite)="addToFavourite($event)"></app-grid-device>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+                        <h2 class="section ion-padding-bottom">
+                            All<span style="font-size: 16px; color: grey">
+                ({{ devices.length }})</span
+              >
+            </h2>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col
+            *ngFor="let device of devices; let i = index"
+            [attr.offset-md]="i % 2 === 0 ? 1 : 0"
+            size-md="5"
+            offset-xs="0.5"
+            size-xs="11"
+          >
+            <app-grid-device
+              [deviceId]="device._id"
+              [hubId]="hubId"
+              [name]="device.name"
+              [type]="device.type"
+              [labels]="device.labels"
+              [icon]="device.icon"
+              [searchQuery]="searchQuery"
+              [favourite]="false"
+              (addFavourite)="addToFavourite($event)"
+            ></app-grid-device>
+          </ion-col>
+        </ion-row>
+      </div>
+
+      <div *ngSwitchCase="'list'">
+        <ion-row>
+          <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+            <ion-card class="ion-no-margin">
+              <ion-card-content>
+                <ion-list>
+                  <ion-item-group *ngFor="let device of listDevices">
+                    <ion-item-divider
+                      *ngIf="device?.letter && device?.name.toUpperCase().startsWith(searchQuery.charAt(0).toUpperCase())"
+                    >
+                      <ion-label>{{device?.name | uppercase}}</ion-label>
+                    </ion-item-divider>
+                    <app-list-device [deviceId]="device._id" [hubId]="hubId" [name]="device.name" [letter]="device?.letter" [searchQuery]="searchQuery" [type]="device.type" [icon]="device.icon"></app-list-device>
+                  </ion-item-group>
+                </ion-list>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <!--
+      Fetching Devices
+    -->
+    <div *ngIf="!devices" id="container">
+      <ion-row class="ion-text-center">
+        <ion-col offset-xs="0.5" size-xs="11">
+          <ion-spinner
+            name="crescent"
+            style="height: 5em; width: 5em"
+          ></ion-spinner>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-xs="0.5" size-xs="11"> Fetching Devices </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

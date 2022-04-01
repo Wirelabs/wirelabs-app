@@ -1,0 +1,21 @@
+<ion-item-sliding [ngSwitch]="status" *ngIf="!letter && name.toUpperCase().startsWith(searchQuery.toUpperCase())">
+    <ion-item lines="none">
+        <ion-label>{{ name }}</ion-label>
+        <ion-button *ngSwitchCase="'active'" fill="clear" color="success" (click)="goToDevices()">
+            <ion-icon color="success" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngSwitchCase="'updating'" class="disabled-opacity" disabled="true" fill="clear" color="warning">
+            <ion-spinner name="bubbles" color="warning"></ion-spinner>
+        </ion-button>
+        <ion-button *ngSwitchCase="'config'" fill="clear" color="tertiary">
+            <ion-icon color="tertiary" name="settings-outline"></ion-icon>
+        </ion-button>
+        <ion-note slot="start" style="display: flex; align-items: center; margin: 0;"><span [class]="status + '-circle circle'"></span></ion-note>
+    </ion-item>
+
+    <ion-item-options side="start">
+        <ion-item-option>
+            <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+        </ion-item-option>
+    </ion-item-options>
+</ion-item-sliding>

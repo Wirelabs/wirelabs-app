@@ -1,0 +1,20 @@
+<ion-item-sliding *ngIf="!letter && name.toUpperCase().startsWith(searchQuery.toUpperCase())">
+    <ion-item lines="none">
+        <ion-label>{{ name }}</ion-label>
+        <ion-button fill="clear" color="success" (click)="goToDevice()">
+            <ion-icon color="success" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+        <ion-note slot="start" style="display: flex; align-items: center; margin: 0; margin-right: 5px; margin-top: 10px; margin-bottom: 10px;"><svg style="width: 20px; height: 20px" viewBox="0 0 24 24">
+          <path
+          style="fill: var(--ion-color-dark)"
+          [attr.d]="icon"
+          />
+        </svg></ion-note>
+    </ion-item>
+
+    <ion-item-options side="start">
+        <ion-item-option>
+            <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+        </ion-item-option>
+    </ion-item-options>
+</ion-item-sliding>

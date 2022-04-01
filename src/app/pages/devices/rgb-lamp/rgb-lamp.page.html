@@ -1,0 +1,109 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Bedroom-Lamp</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="backToDevices()">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-text-center ion-margin-top">
+            <ion-col offset-xs="0.5" size-xs="11">
+                <div class="color-wheel" id="picker"></div>
+            </ion-col>
+        </ion-row>
+
+        <!--
+
+      <ion-row>
+        <ion-col offset-xs="0.5" size-xs="11">
+          <h5 style="border-bottom: 1px solid white;" class="ion-padding-bottom">Brigtness</h5>
+        </ion-col>
+      </ion-row>
+    -->
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-item lines="none" color="none" class="ion-no-padding">
+                    <ion-range class="ion-no-padding ion-padding-top" min="10" max="100" step="5" value="50" pin>
+                        <ion-icon size="small" slot="start" name="sunny-outline"></ion-icon>
+                        <ion-icon size="small" slot="end" name="sunny"></ion-icon>
+                    </ion-range>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <h5 style="border-bottom: 1px solid white" class="ion-padding-bottom">
+                    Pre-Settings
+                </h5>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="5.5">
+                <ion-button expand="block" color="danger" fill="outline">
+                    <ion-icon name="flame-outline" slot="start"></ion-icon>
+                    Warm
+                </ion-button>
+            </ion-col>
+            <ion-col size-xs="5.5">
+                <ion-button expand="block" color="secondary" fill="outline">
+                    <ion-icon name="snow-outline" slot="start"></ion-icon>
+                    Cold
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-button expand="block" color="warning" fill="outline">
+                    <ion-icon name="shuffle-outline" slot="start"></ion-icon>
+                    Fade
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <h5 style="border-bottom: 1px solid white" class="ion-padding-bottom">
+                    Custome-Settings
+                </h5>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-accordion-group>
+                    <ion-accordion value="settings">
+                        <ion-item slot="header">
+                            <ion-label>Saved Colors</ion-label>
+                        </ion-item>
+
+                        <ion-list slot="content">
+                            <ion-item lines="none">
+                                <ion-label>Ur Rot</ion-label>
+                                <ion-button fill="clear" color="success">select</ion-button>
+                            </ion-item>
+                        </ion-list>
+                    </ion-accordion>
+                </ion-accordion-group>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-text-center footer">
+    <ion-button class="footer-btn ion-margin" fill="outline" expand="block">
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Save Color
+    </ion-button>
+</ion-footer>

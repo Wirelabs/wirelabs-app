@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Scan me</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="danger" fill="clear" (click)="closeModal()">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid id="container">
+        <ion-row class="ion-text-center">
+            <ion-col offset-xs="0.5" size-xs="11">
+                <img [src]="imageUrl" width="75%" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
