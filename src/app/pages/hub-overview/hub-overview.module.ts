@@ -11,6 +11,7 @@ import { SettingsPanelComponent } from 'src/app/components/general/settings-pane
 import { ListHubComponent } from 'src/app/components/hub/list-hub/list-hub.component';
 import { GridHubComponent } from 'src/app/components/hub/grid-hub/grid-hub.component';
 import { SettingsPanelModule } from 'src/app/components/general/settings-panel/settings-panel.module';
+import { HubSetupPageModule } from 'src/app/modals/hub-setup/hub-setup.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { SettingsPanelModule } from 'src/app/components/general/settings-panel/s
     IonicModule,
     HubOverviewPageRoutingModule,
     ReactiveFormsModule,
-    SettingsPanelModule
+    SettingsPanelModule,
   ],
   declarations: [HubOverviewPage, ListHubComponent, GridHubComponent],
 })
