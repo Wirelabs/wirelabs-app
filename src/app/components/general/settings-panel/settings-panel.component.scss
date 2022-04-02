@@ -1,3 +1,9 @@
 ion-segment {
     width: 100% !important;
 }
+
+ion-card {
+    border: var(--ion-color-border) 1px solid !important;
+    box-shadow: none;
+    --border-radius: 100%;
+}

@@ -1,0 +1,12 @@
+fieldset {
+    border: 1px solid var(--ion-color-border);
+    border-radius: 5px;
+}
+
+legend {
+    color: var(--ion-color-dark)
+}
+
+ion-chip {
+    border-style: dotted !important;
+}

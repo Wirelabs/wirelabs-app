@@ -67,6 +67,11 @@ const routes: Routes = [
     path: 'reset-password/:id',
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
+  {
+    path: 'hub-update/:id',
+    loadChildren: () => import('./pages/hub-update/hub-update.module').then( m => m.HubUpdatePageModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

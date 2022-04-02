@@ -59,7 +59,7 @@ export class HubOverviewPage implements OnInit {
     const networkModal = await this.modalCtrl.create({
       component: HubSetupPage,
     });
-    return await networkModal.present();
+    //return await networkModal.present();
   }
 
   ionViewDidLeave() {
