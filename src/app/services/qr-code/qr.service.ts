@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class QrService {
   //private baseUrl: string = 'http://localhost:3000/qr/';
   private baseUrl =
-    'https://aws.wirelabs.at/qr/';
+    'https://api.wirelabs.at/qr/';
 
   constructor(private http: HttpClient) {}
 

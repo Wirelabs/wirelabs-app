@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DeviceService {
 
   //private baseUrl: string = 'http://localhost:3000/device/';
-  private baseUrl = 'https://aws.wirelabs.at/device/';
+  private baseUrl = 'https://api.wirelabs.at/device/';
 
   constructor(private http: HttpClient) { }
 

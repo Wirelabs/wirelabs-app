@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
 export class AuthService {
   public isAuthorized = false;
   public role = '';
-  private baseUrl = 'https://aws.wirelabs.at/auth/';
+  private baseUrl = 'https://api.wirelabs.at/auth/';
 
   private madRequest: Promise<boolean>;
   private madeRequestStatic: boolean;

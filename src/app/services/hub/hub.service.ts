@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class HubService {
   //private baseUrl : string = 'http://localhost:3000/hub/';
   private baseUrl =
-    'https://aws.wirelabs.at/hub/';
+    'https://api.wirelabs.at/hub/';
 
   constructor(private http: HttpClient) {}
 
