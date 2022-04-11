@@ -13,6 +13,26 @@
 </ion-header>
 
 <ion-content>
+    <ion-tabs>
+        <ion-tab-bar slot="top">
+            <ion-tab-button tab="schedule">
+                <ion-icon name="color-palette-outline"></ion-icon>
+                <ion-label>Color</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="speakers">
+                <ion-icon name="layers-outline"></ion-icon>
+                <ion-label>Customs</ion-label>
+                <ion-badge>5</ion-badge>
+            </ion-tab-button>
+
+            <ion-tab-button tab="map">
+                <ion-icon name="code-working-outline"></ion-icon>
+                <ion-label>Actions</ion-label>
+                <ion-badge>6</ion-badge>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
     <ion-grid>
         <ion-row class="ion-text-center ion-margin-top">
             <ion-col offset-xs="0.5" size-xs="11">
@@ -20,7 +40,8 @@
             </ion-col>
         </ion-row>
 
-        <!--
+        <div *ngIf="tab === 'color'">
+            <!--
 
       <ion-row>
         <ion-col offset-xs="0.5" size-xs="11">
@@ -29,73 +50,102 @@
       </ion-row>
     -->
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="11">
-                <ion-item lines="none" color="none" class="ion-no-padding">
-                    <ion-range class="ion-no-padding ion-padding-top" min="10" max="100" step="5" value="50" pin>
-                        <ion-icon size="small" slot="start" name="sunny-outline"></ion-icon>
-                        <ion-icon size="small" slot="end" name="sunny"></ion-icon>
-                    </ion-range>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="11">
+                    <ion-item lines="none" color="none" class="ion-no-padding">
+                        <ion-range class="ion-no-padding ion-padding-top" min="10" max="100" step="5" value="50" pin>
+                            <ion-icon size="small" slot="start" name="sunny-outline"></ion-icon>
+                            <ion-icon size="small" slot="end" name="sunny"></ion-icon>
+                        </ion-range>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="11">
-                <h5 style="border-bottom: 1px solid white" class="ion-padding-bottom">
-                    Pre-Settings
-                </h5>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="11">
+                    <h5 style="border-bottom: 1px solid white" class="ion-padding-bottom">
+                        Pre-Settings
+                    </h5>
+                </ion-col>
+            </ion-row>
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="5.5">
-                <ion-button expand="block" color="danger" fill="outline">
-                    <ion-icon name="flame-outline" slot="start"></ion-icon>
-                    Warm
-                </ion-button>
-            </ion-col>
-            <ion-col size-xs="5.5">
-                <ion-button expand="block" color="secondary" fill="outline">
-                    <ion-icon name="snow-outline" slot="start"></ion-icon>
-                    Cold
-                </ion-button>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="5.5">
+                    <ion-button expand="block" color="danger" fill="outline">
+                        <ion-icon name="flame-outline" slot="start"></ion-icon>
+                        Warm
+                    </ion-button>
+                </ion-col>
+                <ion-col size-xs="5.5">
+                    <ion-button expand="block" color="secondary" fill="outline">
+                        <ion-icon name="snow-outline" slot="start"></ion-icon>
+                        Cold
+                    </ion-button>
+                </ion-col>
+            </ion-row>
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="11">
-                <ion-button expand="block" color="warning" fill="outline">
-                    <ion-icon name="shuffle-outline" slot="start"></ion-icon>
-                    Fade
-                </ion-button>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="11">
+                    <ion-button expand="block" color="warning" fill="outline">
+                        <ion-icon name="shuffle-outline" slot="start"></ion-icon>
+                        Fade
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="11">
-                <h5 style="border-bottom: 1px solid white" class="ion-padding-bottom">
-                    Custome-Settings
-                </h5>
-            </ion-col>
-        </ion-row>
+        <div *ngIf="tab === 'custom'">
 
-        <ion-row>
-            <ion-col offset-xs="0.5" size-xs="11">
-                <ion-accordion-group>
-                    <ion-accordion value="settings">
-                        <ion-item slot="header">
-                            <ion-label>Saved Colors</ion-label>
-                        </ion-item>
 
-                        <ion-list slot="content">
-                            <ion-item lines="none">
-                                <ion-label>Ur Rot</ion-label>
-                                <ion-button fill="clear" color="success">select</ion-button>
+            <ion-row>
+                <ion-col offset-xs="0.5" size-xs="11">
+                    <ion-accordion-group>
+                        <ion-accordion value="settings">
+                            <ion-item slot="header">
+                                <ion-label>Saved Colors</ion-label>
                             </ion-item>
-                        </ion-list>
-                    </ion-accordion>
-                </ion-accordion-group>
+
+                            <ion-list slot="content">
+                                <ion-item lines="none">
+                                    <ion-label>Ur Rot</ion-label>
+                                    <ion-button fill="clear" color="success">select</ion-button>
+                                </ion-item>
+                            </ion-list>
+                        </ion-accordion>
+                    </ion-accordion-group>
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <ion-row>
+            <ion-col>
+                <ion-button fill="outline" color="success" expand="block" style="--border-style: dashed;">
+                    select date
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+            <ion-col>
+                <h3>ON</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button fill="outline" color="success" expand="block" style="--border-style: dashed;">
+                    select time
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+            <ion-col>
+                <h3>DO</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="eventPicker()" [fill]="selectedEvent ? 'solid' : 'outline'" [color]="selectedEvent ? 'primary' : 'success'" expand="block" style="--border-style: dashed;">
+                    {{ selectedEvent || 'select event' }}
+                </ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

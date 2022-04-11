@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, PickerController } from '@ionic/angular';
 import iro from '@jaames/iro';
 @Component({
   selector: 'app-rgb-lamp',
@@ -10,11 +10,12 @@ import iro from '@jaames/iro';
 export class RgbLampPage implements OnInit {
   private deviceId: string;
   private hubId: string;
-
+  public tab: string = "color";
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private navController: NavController
+    private navController: NavController,
+    private pickerController: PickerController
   ) {
     this.activeRoute.params.subscribe((params) => {
       this.deviceId = params.deviceId;
@@ -40,6 +41,32 @@ export class RgbLampPage implements OnInit {
 
   changeColor(color) {
     console.log(color.hexString);
+  }
+
+  public selectedEvent = undefined;
+  public async eventPicker() {
+    const pick = await this.pickerController.create({
+      buttons: [
+        {
+          text: 'Confirm',
+          handler: (selected) => {
+            this.selectedEvent = selected.event.text;
+          },
+        }
+      ],
+      columns: [
+        {
+          name: 'event',
+          options: [
+            { text: 'Turn On', value: 'to' },
+            { text: 'Turn Off', value: 'tof' },
+            { text: 'Change Color', value: 'cc' },
+          ]
+        }
+      ]
+    });
+    
+    await pick.present();
   }
 
   public backToDevices(): void {
