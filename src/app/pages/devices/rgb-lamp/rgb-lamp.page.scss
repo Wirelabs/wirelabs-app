@@ -5,7 +5,7 @@
 }
 
 .footer {
-    background-color: var(--ion-color-light) !important;
+    background-color: var(--ion-color-light);
 }
 
 .footer-btn {
@@ -13,4 +13,53 @@
     margin-bottom: 1em;
     margin-left: 10%;
     margin-right: 10%;
+}
+
+ion-title {
+    color: var(--ion-color-dark);
+}
+
+ion-card {
+    border: var(--ion-color-border) 1px solid !important;
+    box-shadow: none;
+    --border-radius: 100%;
+}
+
+ion-item-divider {
+    border-radius: 5px !important;
+}
+
+ion-toolbar {
+    --border-width: 0px 0px 0px 0px !important;
+}
+
+:host {
+    --super-tabs-toolbar-background: var(--ion-toolbar-background, var(--ion-color-step-50, #f7f7f7));
+    --st-indicator-color: var(--ion-color-primary);
+    --st-base-color-active: var(--ion-color-primary);
+    --st-base-color-inactive: var(--ion-color-dark);
+}
+
+super-tabs-toolbar {
+    &:after {
+        background: transparent;
+    }
+}
+
+ion-item {
+    --inner-padding-end: 0;
+}
+
+.section {
+    color: var(--ion-color-dark);
+    border-bottom: 1px solid var(--ion-color-dark);
+}
+
+fieldset {
+    border: 1px solid var(--ion-color-border);
+    border-radius: 5px;
+}
+
+legend {
+    color: var(--ion-color-dark)
 }

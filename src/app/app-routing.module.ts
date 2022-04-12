@@ -72,6 +72,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/hub-update/hub-update.module').then( m => m.HubUpdatePageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'create-action',
+    loadChildren: () => import('./modals/create-action/create-action.module').then( m => m.CreateActionPageModule)
+  },
 ];
 
 @NgModule({

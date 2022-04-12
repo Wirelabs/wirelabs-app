@@ -12,11 +12,12 @@ import { AuthInterceptor } from './interceptor/authentication/auth.interceptor';
 import { WifiWizard2 } from '@awesome-cordova-plugins/wifi-wizard-2/ngx';
 import { HubSetupPage } from './modals/hub-setup/hub-setup.page';
 import { QrCodePage } from './modals/qr-code/qr-code.page';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 @NgModule({
   declarations: [AppComponent, HubSetupPage, QrCodePage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, SuperTabsModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

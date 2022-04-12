@@ -4,10 +4,9 @@ ion-item {
 }
 
 ion-card {
+    border: var(--ion-color-border) 1px solid !important;
+    box-shadow: none;
     --border-radius: 100%;
-    border: var(--ion-color-light) 1px solid !important;
-    display: flex;
-    flex-direction: column;
 }
 
 ion-card-content {

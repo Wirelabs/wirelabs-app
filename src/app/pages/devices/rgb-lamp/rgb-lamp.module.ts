@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RgbLampPageRoutingModule } from './rgb-lamp-routing.module';
 
 import { RgbLampPage } from './rgb-lamp.page';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RgbLampPageRoutingModule
+    RgbLampPageRoutingModule,
+    SuperTabsModule
   ],
   declarations: [RgbLampPage]
 })
