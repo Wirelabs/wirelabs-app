@@ -25,8 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. iOS]
- - Grafe Versions [e.g. 22]
- - Node Version [e.g. 12.x]
+ - Wirelabs Versions [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.
