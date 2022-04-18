@@ -30,7 +30,7 @@ export class HubSetupPage implements OnInit {
     private fb: FormBuilder
   ) {
     this.credentialForm = fb.group({
-      name: ["", Validators.required],
+      name: ["My Awsome Hub", Validators.required],
       ssid: ["", Validators.required],
       password: ["", Validators.required]
     });
@@ -67,8 +67,8 @@ export class HubSetupPage implements OnInit {
     await alert.present();
   }
 
-  public async saveCredentials(event: any): Promise<void> {
-
+  public async saveCredentials(event): Promise<void> {
+    event.preventDefault();
     console.log(this.credentialForm);
     
     let name = this.credentialForm.controls.name.value;

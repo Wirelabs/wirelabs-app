@@ -18,4 +18,5 @@ import { HubSetupPage } from './hub-setup.page';
   ],
   declarations: [HubSetupPage],
 })
-export class HubSetupPageModule {}
+export class HubSetupPageModule {
+}
