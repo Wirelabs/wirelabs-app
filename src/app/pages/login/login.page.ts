@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MenuController } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import {
@@ -9,6 +9,7 @@ import {
 } from '@capacitor-community/barcode-scanner';
 import { QrService } from 'src/app/services/qr-code/qr.service';
 import { take } from 'rxjs/operators';
+import { LogicService } from 'src/app/services/general/logic/logic.service';
 
 @Component({
     selector: 'app-login',
@@ -18,7 +19,6 @@ import { take } from 'rxjs/operators';
 export class LoginPage implements OnInit {
     public loginForm: FormGroup;
     public errorMessage = '';
-    public networks = [];
     public firstActivation = true;
     public scanActive = false;
 
@@ -28,7 +28,8 @@ export class LoginPage implements OnInit {
         private authService: AuthService,
         private router: Router,
         private renderer: Renderer2,
-        private qrService: QrService
+        private qrService: QrService,
+        public logicService: LogicService
     ) {
         this.authService
             .checkAuthenticated()
@@ -44,12 +45,8 @@ export class LoginPage implements OnInit {
             password: ['', Validators.required],
         });
 
-        if(localStorage.getItem('activated')) {
-          this.firstActivation = false;
-        }else {
-          this.firstActivation = true;
-          localStorage.setItem('activated', "true");
-        }
+        this.firstActivation = Boolean(localStorage.getItem('activated')) || false;
+        localStorage.setItem('activated', "true");
         
 
     }
@@ -58,7 +55,9 @@ export class LoginPage implements OnInit {
 
     ionViewWillEnter() {
         this.menuCtrl.enable(false);
-        BarcodeScanner.prepare();
+        if(this.logicService.isCapacitor) {
+            BarcodeScanner.prepare();
+        }
     }
 
     public async startScanner(): Promise<void> {

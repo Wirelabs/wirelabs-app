@@ -6,7 +6,11 @@ import { AlertController, Platform, ToastController } from '@ionic/angular';
 })
 export class LogicService {
 
-  constructor(private platform: Platform, private toastController: ToastController, private alertController: AlertController) { }
+  public isCapacitor = false;
+
+  constructor(private platform: Platform, private toastController: ToastController, private alertController: AlertController) {
+    this.isCapacitor = platform.is("capacitor");
+  }
 
   public async createAlert(message: string, title?: string, buttons?: string[]) : Promise<void> {
 

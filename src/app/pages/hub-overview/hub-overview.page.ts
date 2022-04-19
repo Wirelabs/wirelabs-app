@@ -20,6 +20,7 @@ import { HubService } from '../../services/hub/hub.service';
 import { WifiWizard2 } from '@awesome-cordova-plugins/wifi-wizard-2/ngx';
 import { HubSetupPage } from '../../modals/hub-setup/hub-setup.page';
 import { Subscription } from 'rxjs';
+import { LogicService } from 'src/app/services/general/logic/logic.service';
 
 @Component({
   selector: 'app-hub-overview',
@@ -49,7 +50,8 @@ export class HubOverviewPage implements OnInit {
     private cdRef: ChangeDetectorRef,
     private loadingController: LoadingController,
     private hubService: HubService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private logicService: LogicService
   ) {
     this.routerOutlet.swipeGesture = false;
     this.onMobile = this.platform.is('ios') || this.platform.is('android');
@@ -72,17 +74,17 @@ export class HubOverviewPage implements OnInit {
   public ionViewWillEnter() {
     this.menuCtrl.enable(true);
 
-    Keyboard.addListener('keyboardWillShow', (info) => {
-      console.log('keyboard will show with height:', info.keyboardHeight);
-      this.keyBoardActive = true;
-      this.cdRef.detectChanges();
-    });
-
-    Keyboard.addListener('keyboardDidHide', () => {
-      console.log('keyboard will hide');
-      this.keyBoardActive = false;
-      this.cdRef.detectChanges();
-    });
+    if(this.logicService.isCapacitor) {
+      Keyboard.addListener('keyboardWillShow', (info) => {
+        this.keyBoardActive = true;
+        this.cdRef.detectChanges();
+      });
+  
+      Keyboard.addListener('keyboardDidHide', () => {
+        this.keyBoardActive = false;
+        this.cdRef.detectChanges();
+      });
+    }
 
     // fetch all user hubs from server
     this.subscruptions.push(this.hubService

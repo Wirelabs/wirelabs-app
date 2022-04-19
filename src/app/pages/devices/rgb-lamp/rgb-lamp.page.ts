@@ -44,6 +44,15 @@ export class RgbLampPage implements OnInit {
     });
 
     colorPicker.on('color:change', this.changeColor);
+    colorPicker.on('input:start', () => {
+      this.usingRange = true;
+    });
+
+    colorPicker.on('input:end', () => {
+      this.usingRange = false;
+    });
+
+
   }
 
   changeColor(color) {
