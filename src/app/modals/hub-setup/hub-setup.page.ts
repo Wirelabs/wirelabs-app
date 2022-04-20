@@ -5,11 +5,13 @@ import {
   LoadingController,
   ModalController,
   AlertController,
+  Platform,
 } from '@ionic/angular';
 import { HubService } from 'src/app/services/hub/hub.service';
 import { McuService } from 'src/app/services/microcontroller/mcu.service';
 import * as mongoose from 'mongoose';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hub-setup',
@@ -27,7 +29,8 @@ export class HubSetupPage implements OnInit {
     private wifiWizard2: WifiWizard2,
     private mcuService: McuService,
     private hubService: HubService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private platform: Platform
   ) {
     this.credentialForm = fb.group({
       name: ["My Awsome Hub", Validators.required],
@@ -69,23 +72,18 @@ export class HubSetupPage implements OnInit {
 
   public async saveCredentials(event): Promise<void> {
     event.preventDefault();
-    console.log(this.credentialForm);
     
     let name = this.credentialForm.controls.name.value;
     let ssid = this.credentialForm.controls.ssid.value;
     let password = this.credentialForm.controls.password.value;
-
-    console.log(name);
-    console.log(ssid);
-    console.log(password);
-
-    /*
+    
     const loading = await this.loadingController.create({
       message: 'Setup new Hub',
     });
 
     await loading.present();
 
+    // TEMP -> Make server side
     // generate new ID
     const id = new mongoose.Types.ObjectId();
 
@@ -98,17 +96,19 @@ export class HubSetupPage implements OnInit {
         await this.createAlert('Error', err.message);
       });
 
-    // TODO android
-    await this.wifiWizard2.iOSDisconnectNetwork((await Wifi.getSSID()).ssid);
+    if(this.platform.is('ios')) {
+      await this.wifiWizard2.iOSDisconnectNetwork((await Wifi.getSSID()).ssid);
+    }else if(this.platform.is('android')) {
+      await this.wifiWizard2.disconnect((await Wifi.getSSID()).ssid);
+    }
 
     this.hubService
       .generateNewHub(id.toString(), name)
       .pipe(take(1))
       .subscribe(async (res) => {
-        console.log(res);
         await loading.dismiss();
         await this.createAlert('Success', 'Successfully created a new Hub');
         await this.modalController.dismiss();
-      });*/
+      });
   }
 }

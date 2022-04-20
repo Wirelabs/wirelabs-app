@@ -1,4 +1,4 @@
-<div *ngIf="(searchQuery && name.toUpperCase().includes(searchQuery.toUpperCase())) || searchQuery?.length === 0">
+<div [id]="id" *ngIf="(searchQuery && name.toUpperCase().includes(searchQuery.toUpperCase())) || searchQuery?.length === 0">
     <div class="labels">
         <ion-chip *ngFor="let label of labels" [style.color]="label.color" [style.border-color]="label.color" outline>
             <ion-label>{{ label.name }}</ion-label>
@@ -22,7 +22,7 @@
             </ion-item>
         </ion-card-header>
         <ion-card-content class="ion-text-center" (click)="goToDevices()">
-            <img class="ion-margin-top" [src]="'/assets/hub-case-' + status + '.svg'" width="50%">
+            <img class="ion-margin-top" [src]="'/assets/hub-case-' + status + '.svg'" width="30%">
             <div class="ion-margin-top hub-status">
                 <span *ngIf="status !== 'updating'" [class]="status + '-circle circle' "></span>
                 <ion-spinner *ngIf="status === 'updating'" name="bubbles" color="warning"></ion-spinner>

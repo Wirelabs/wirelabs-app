@@ -34,4 +34,31 @@ export class LogicService {
       return await toast.present();
     }
   }
+
+  
+  public divider(arr: any[], param: string): any[] {
+    const list: any[] = [];
+    let lastChar = '';
+    for (let i = 0, len = arr.length; i < len; i++) {
+      const item = arr[i];
+      if (item[param].charAt(0) !== lastChar) {
+        list.push({ name: item[param].charAt(0), letter: true });
+        lastChar = item[param].charAt(0);
+      }
+      list.push(item);
+    }
+    return list;
+  }
+
+  public sort(arr: any[], param: string): any[] {
+    return arr.sort((a, b) => {
+      if (a[param] > b[param]) {
+        return 1;
+      } else if (a[param] < b[param]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
 }

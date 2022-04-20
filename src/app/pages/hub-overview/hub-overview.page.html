@@ -117,7 +117,7 @@
 <!--
     Footer
 -->
-<ion-footer class="ion-text-center footer" *ngIf="onMobile && hubs?.length > 0" [hidden]="keyBoardActive">
+<ion-footer class="ion-text-center footer" *ngIf="logicService.isCapacitor && hubs?.length > 0" [hidden]="keyBoardActive">
     <ion-button class="footer-btn" fill="outline" expand="block" (click)="findNewHub()">
         <ion-icon name="search-outline" slot="start"></ion-icon>
         Find a new Hub

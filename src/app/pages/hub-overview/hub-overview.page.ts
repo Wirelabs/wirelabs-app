@@ -4,9 +4,11 @@ import { Wifi } from '@capacitor-community/wifi';
 //import { WifiWizard2 } from '@awesome-cordova-plugins/wifi-wizard-2/ngx';
 import { Keyboard } from '@capacitor/keyboard';
 import { take } from 'rxjs/operators';
+import { createAnimation, Animation } from '@ionic/core';
 
 import {
   AlertController,
+  AnimationController,
   IonRouterOutlet,
   LoadingController,
   MenuController,
@@ -27,15 +29,15 @@ import { LogicService } from 'src/app/services/general/logic/logic.service';
   templateUrl: './hub-overview.page.html',
   styleUrls: ['./hub-overview.page.scss'],
 })
-export class HubOverviewPage implements OnInit {
+export class HubOverviewPage {
+
   public hubs = undefined;
   public favouriteHubs = [];
   public listHubs = [];
   public searchQuery = '';
 
   public static readonly SSID: string = 'WireLabs Hub'; // eslint-disable-line
-  public subscruptions : Subscription[]= [];
-  public onMobile = false;
+  public subscruptions : Subscription[] = [];
   public keyBoardActive = false;
   public mode = 'grid';
 
@@ -46,29 +48,22 @@ export class HubOverviewPage implements OnInit {
     private modalCtrl: ModalController,
     private platform: Platform,
     private routerOutlet: IonRouterOutlet,
-    private router: Router,
     private cdRef: ChangeDetectorRef,
     private loadingController: LoadingController,
     private hubService: HubService,
     private toastController: ToastController,
-    private logicService: LogicService
+    public logicService: LogicService,
+    private animationCtrl: AnimationController
   ) {
     this.routerOutlet.swipeGesture = false;
-    this.onMobile = this.platform.is('ios') || this.platform.is('android');
   }
 
-  public async ngOnInit() {
-    const networkModal = await this.modalCtrl.create({
-      component: HubSetupPage,
-    });
-    //return await networkModal.present();
-  }
-
-  ionViewDidLeave() {
+  public ionViewDidLeave() {
     this.subscruptions.forEach(subscription => { subscription.unsubscribe() });
     this.hubs = undefined;
     this.favouriteHubs = [];
     this.listHubs = [];
+    this.mode = 'grid';
   }
 
   public ionViewWillEnter() {
@@ -95,20 +90,12 @@ export class HubOverviewPage implements OnInit {
           const fetchedHubs = res.data.hubs;
 
           // sort and generate list view
-          this.hubs = this.sort(fetchedHubs, 'name');
-          this.listHubs = this.divider(this.sort(fetchedHubs, 'name'), 'name');
+          this.hubs = this.logicService.sort(fetchedHubs, 'name');
+          this.listHubs = this.logicService.divider(this.logicService.sort(fetchedHubs, 'name'), 'name');
 
-          for (let i = 0; i < this.hubs.length; i++) {
-            if (this.hubs[i].favourite) {
-              this.favouriteHubs.push(this.hubs[i]);
-              this.hubs.splice(i, 1);
-              i--;
-            }
-          }
-
-          console.log(this.hubs);
-
-          console.log(this.listHubs);
+          this.favouriteHubs = this.hubs.filter(hub => hub.favourite == true);
+          this.hubs = this.hubs.filter(hub => !this.favouriteHubs.includes(hub));
+          
         }
       }));
   }
@@ -127,31 +114,39 @@ export class HubOverviewPage implements OnInit {
       .pipe(take(1))
       .subscribe(async (res) => {
         if (res.data) {
+
           const toast = await this.toastController.create({
             message: 'Successfully changed favourisation',
             duration: 1000,
           });
-          await toast.present();
-        }
-      });
+          toast.present();
+          
+          const dismissAnimation = this.animationCtrl.create()
+          .addElement(document.getElementById(event.id))
+          .duration(300)
+          .fromTo('opacity', '1', '0').onFinish(() => {
+            if (event.favourite) {
+              for (let i = 0; i < this.favouriteHubs.length; i++) {
+                if (this.favouriteHubs[i]._id === event.id) { // eslint-disable-line
+                  this.hubs.push(this.favouriteHubs[i]);
+                  this.favouriteHubs.splice(i, 1);
+                  return;
+                }
+              }
+            }
+  
+            for (let i = 0; i < this.hubs.length; i++) {
+              if (this.hubs[i]._id === event.id) { // eslint-disable-line
+                this.favouriteHubs.push(this.hubs[i]);
+                this.hubs.splice(i, 1);
+                return;
+              }
+            }
+          });
 
-    if (event.favourite) {
-      for (let i = 0; i < this.favouriteHubs.length; i++) {
-        if (this.favouriteHubs[i]._id === event.id) { // eslint-disable-line
-          this.hubs.push(this.favouriteHubs[i]);
-          this.favouriteHubs.splice(i, 1);
-          return;
+          await dismissAnimation.play();
         }
-      }
-    }
-
-    for (let i = 0; i < this.hubs.length; i++) {
-      if (this.hubs[i]._id === event.id) { // eslint-disable-line
-        this.favouriteHubs.push(this.hubs[i]);
-        this.hubs.splice(i, 1);
-        return;
-      }
-    }
+      });    
   }
 
   public async findNewHub(): Promise<void> {
@@ -258,31 +253,5 @@ export class HubOverviewPage implements OnInit {
       buttons: ['OK'],
     });
     await alert.present();
-  }
-
-  private divider(arr: any[], param: string): any[] {
-    const list: any[] = [];
-    let lastChar = '';
-    for (let i = 0, len = arr.length; i < len; i++) {
-      const item = arr[i];
-      if (item[param].charAt(0) !== lastChar) {
-        list.push({ name: item[param].charAt(0), letter: true });
-        lastChar = item[param].charAt(0);
-      }
-      list.push(item);
-    }
-    return list;
-  }
-
-  private sort(arr: any[], param: string): any[] {
-    return arr.sort((a, b) => {
-      if (a[param] > b[param]) {
-        return 1;
-      } else if (a[param] < b[param]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
   }
 }
