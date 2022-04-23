@@ -15,6 +15,7 @@ import { QrCodePage } from './modals/qr-code/qr-code.page';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { HubOverviewPageModule } from './pages/hub-overview/hub-overview.module';
 import { HubSetupPageModule } from './modals/hub-setup/hub-setup.module';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
 
 @NgModule({
   declarations: [AppComponent, QrCodePage],
@@ -24,7 +25,7 @@ import { HubSetupPageModule } from './modals/hub-setup/hub-setup.module';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, WifiWizard2],
+  }, WifiWizard2, Network],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

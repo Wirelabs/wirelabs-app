@@ -3,7 +3,13 @@
         <ion-menu contentId="main-content" type="overlay">
             <ion-content>
                 <ion-list id="inbox-list">
-                    <ion-list-header class="ion-margin-bottom">Wirelabs</ion-list-header>
+                    <ion-list-header class="ion-margin-bottom header">
+
+                        <ion-avatar>
+                            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                        </ion-avatar>
+
+                    </ion-list-header>
 
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
                         <ion-item [hidden]="p.role && p.role != this.authService.role" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">

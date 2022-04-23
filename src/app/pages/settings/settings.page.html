@@ -1,18 +1,86 @@
 <ion-header [translucent]="false">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Settings</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Settings</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines="full">
-    <ion-icon slot="start" name="moon"></ion-icon>
-    <ion-label>
-      Toggle Dark Theme
-    </ion-label>
-    <ion-toggle slot="end" [(ngModel)]="darkModeEnabled" (ionChange)="toggleThemMode()"></ion-toggle>
-  </ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <h3>Appearance</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="color-fill-outline"></ion-icon>
+                    <ion-label>
+                        Theme
+                    </ion-label>
+                    <ion-select [value]="selectedTheme" (ionChange)="selectTheme($event)" interface="action-sheet">
+                        <ion-select-option value="dark" selectedText="Dark">Dark</ion-select-option>
+                        <ion-select-option value="light" selectedText="Light">Light</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="code-outline"></ion-icon>
+                    <ion-label>
+                        Mode
+                    </ion-label>
+                    <ion-select value="advanced">
+                        <ion-select-option value="simple" selectedText="Simple">Simple</ion-select-option>
+                        <ion-select-option value="advanced" selectedText="Advanced">Advanced</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <h3>Localisation</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="language-outline"></ion-icon>
+                    <ion-label>
+                        Language
+                    </ion-label>
+                    <ion-select value="en">
+                        <ion-select-option value="en" selectedText="English">English</ion-select-option>
+                        <ion-select-option value="de" selectedText="Deutsch">Deutsch</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <h3>Networking</h3>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col offset-xs="0.5" size-xs="11">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="globe-outline"></ion-icon>
+                    <ion-label>
+                        Network
+                    </ion-label>
+                    <ion-select value="wifi">
+                        <ion-select-option value="local" selectedText="Local">Local</ion-select-option>
+                        <ion-select-option value="wifi" selectedText="Wifi">Wifi</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

@@ -76,6 +76,10 @@ const routes: Routes = [
     path: 'create-action',
     loadChildren: () => import('./modals/create-action/create-action.module').then( m => m.CreateActionPageModule)
   },
+  {
+    path: 'personal-informations',
+    loadChildren: () => import('./pages/personal-informations/personal-informations.module').then( m => m.PersonalInformationsPageModule)
+  },
 ];
 
 @NgModule({

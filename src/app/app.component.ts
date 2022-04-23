@@ -4,6 +4,8 @@ import { Keyboard } from '@capacitor/keyboard';
 import { AuthService } from './services/authentication/auth.service';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { LogicService } from './services/general/logic/logic.service';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { Platform } from '@ionic/angular';
 
 @Component({
     selector: 'app-root',
@@ -33,27 +35,31 @@ export class AppComponent {
         private renderer: Renderer2,
         public authService: AuthService,
         private router: Router,
-        private logicService: LogicService
+        private logicService: LogicService,
+        private network: Network,
+        private platform: Platform
     ) {
+        let selectedTheme : string = localStorage.getItem('theme'); 
+        this.renderer.setAttribute(document.body, 'color-theme', selectedTheme);
         if (logicService.isCapacitor) {
-            if (JSON.parse(localStorage.getItem('darkMode'))) {
-                this.renderer.setAttribute(
-                    document.body,
-                    'color-theme',
-                    'dark'
-                );
+            if (selectedTheme === 'dark') {
                 StatusBar.setStyle({ style: Style.Dark });
             } else {
-                this.renderer.setAttribute(
-                    document.body,
-                    'color-theme',
-                    'light'
-                );
                 StatusBar.setStyle({ style: Style.Light });
             }
 
             Keyboard.setAccessoryBarVisible({ isVisible: true });
         }
+        
+        window.addEventListener('offline', () => {
+          console.log("hell");
+        });
+
+        this.platform.ready().then(() => {
+          console.log(network.type);
+
+        });
+
         this.authService.refreshRole();
     }
 

@@ -123,3 +123,8 @@ ion-split-pane {
     --side-max-width: 15%;
     --border: var(--ion-color-border) 1px solid !important;
 }
+
+.header {
+    display: flex;
+    justify-content: center;
+}
