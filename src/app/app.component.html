@@ -4,11 +4,17 @@
             <ion-content>
                 <ion-list id="inbox-list">
                     <ion-list-header class="ion-margin-bottom header">
-
-                        <ion-avatar>
-                            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                        </ion-avatar>
-
+                        <ion-item lines="none" style="--background: transparent !important; color: black;">
+                            <ion-avatar slot="start">
+                                <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                            </ion-avatar>
+                            <ion-label>
+                                Marvin Koch<br>
+                                <span style="font-size: 12px; color: var(--ion-color-dark);">
+                                    koch.marvin@wirelabs.at
+                                </span>
+                            </ion-label>
+                        </ion-item>
                     </ion-list-header>
 
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">

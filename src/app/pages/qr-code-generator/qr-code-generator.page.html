@@ -10,13 +10,13 @@
 <ion-content>
     <ion-grid>
         <ion-row>
-            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
-                <h5 class="section ion-padding-bottom">Experation Date</h5>
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                <h5 class="section ion-padding-bottom">Expiration date</h5>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
-                <ion-item lines="none">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                <ion-item lines="none" class="ion-no-padding date-picker">
                     <ion-label>{{ selectedDate }}</ion-label>
                     <ion-button fill="clear" color="primary" id="open-modal">
                         <ion-icon name="calendar-outline"></ion-icon>
@@ -25,31 +25,48 @@
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                <h5 class="section ion-padding-bottom">Allowed activations</h5>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                <ion-item lines="none" class="ion-no-padding date-picker">
+                    <ion-input [(ngModel)]="maxActivations" value="1" placeholder="max activations" type="number"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
                 <h5 class="section ion-padding-bottom">Permissions</h5>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col offset-md="1" size-md="10" offset-xs="0.5" size-xs="11">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
                 <ion-accordion-group [multiple]="true">
-                    <ion-accordion *ngFor="let hub of hubs" [value]="hub.id" [hidden]="hub.devices == 0">
-                        <ion-item slot="header">
-                            <ion-label [class]="hub.permission === true ? 'selected'  : 'normal'">{{ hub.name }}</ion-label>
-                        </ion-item>
-                        <ion-list slot="content">
-                            <ion-item class="ion-padding-start">
-                                <ion-label>All devices</ion-label>
-                                <ion-toggle [(ngModel)]="hub.allDeviceModel" (ionChange)="activateAll($event, hub._id)" color="primary"></ion-toggle>
-                            </ion-item>
-                            <ion-item *ngFor="let device of hub.devices" class="ion-padding-start">
-                                <ion-label>{{ device.name }}</ion-label>
-                                <ion-toggle [(ngModel)]="device.permission" (ionChange)="activateDevice($event, hub._id, device._id)"></ion-toggle>
-                            </ion-item>
-                        </ion-list>
-                    </ion-accordion>
+                    <ion-card class="ion-no-margin ion-margin-bottom" *ngFor="let hub of hubs" [hidden]="hub.devices.length == 0">
+                        <ion-card-content class="ion-no-padding ion-padding-start ">
+                            <ion-accordion [value]="hub._id">
+                                <ion-item slot="header" class="ion-no-padding" lines="none">
+                                    <ion-label [class]="hub.permission === true ? 'selected'  : 'normal'">{{ hub.name }}</ion-label>
+                                </ion-item>
+                                <ion-list slot="content">
+                                    <ion-item class="acc-item ion-margin-end" lines="none">
+                                        <ion-label>All devices</ion-label>
+                                        <ion-toggle [(ngModel)]="hub.allDeviceModel" (ionChange)="activateAll($event, hub._id)" color="primary"></ion-toggle>
+                                    </ion-item>
+                                    <ion-item *ngFor="let device of hub.devices; let i = index" lines="none" [className]="i % 2 == 0 ? 'no-acc ion-margin-end' : 'acc-item ion-margin-end'">
+                                        <ion-label>{{ device.name }}</ion-label>
+                                        <ion-toggle [(ngModel)]="device.permission" (ionChange)="activateDevice($event, hub._id, device._id)"></ion-toggle>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-accordion>
+                        </ion-card-content>
+                    </ion-card>
                 </ion-accordion-group>
             </ion-col>
         </ion-row>
+
         <div *ngIf="!hubs" id="container">
             <ion-row class="ion-text-center">
                 <ion-col offset-xs="0.5" size-xs="11">
@@ -75,7 +92,9 @@
 </ion-content>
 
 <ion-footer class="ion-text-center footer">
-    <ion-button class="footer-btn ion-margin" fill="outline" expand="block" (click)="createQRCode()">
-        <ion-icon name="qr-code-outline" slot="start"></ion-icon>Create QR-Code
-    </ion-button>
+    <ion-toolbar>
+        <ion-button fill="outline" expand="block" (click)="createQRCode()">
+            <ion-icon name="qr-code-outline" slot="start"></ion-icon>Create QR-Code
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

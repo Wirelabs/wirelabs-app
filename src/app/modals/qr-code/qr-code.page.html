@@ -1,6 +1,5 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Scan me</ion-title>
         <ion-buttons slot="end">
             <ion-button color="danger" fill="clear" (click)="closeModal()">
                 <ion-icon name="close-outline"></ion-icon>
@@ -10,10 +9,35 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid id="container">
-        <ion-row class="ion-text-center">
-            <ion-col offset-xs="0.5" size-xs="11">
-                <img [src]="imageUrl" width="75%" />
+    <ion-grid>
+        <ion-row>
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11">
+                <h2 class="section ion-padding-bottom">You are ready to scan</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-margin-bottom">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11" class="ion-text-left">
+                <ion-card class="ion-no-margin">
+                    <ion-card-content class="ion-no-padding ion-padding">
+                        <ion-text>1. Get your Phone and open Wirelabs-App</ion-text><br>
+                        <ion-text>2. If logged in log out and go to the login page<br></ion-text>
+                        <ion-text>3. Tap on the
+                            <ion-icon name="qr-code-outline" color="primary">
+                            </ion-icon> icon <br> </ion-text>
+                        <ion-text>4. Scan your freshly generated QR-Code</ion-text>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center ion-margin-top ion-margin-bottom">
+            <ion-col offset-lg="6" size-lg="4" offset-md="3" size-md="6" offset-sm="2" size-sm="8" offset-xs="0.5" size-xs="11" class="qr-code-col">
+                <!-- <div class="parent">
+                    <img [src]="imageUrl" width="100%" class="ion-padding" /><br>
+                    <img src="assets/hub-case-active.svg" width="30%" class="logo" />
+                </div>-->
+                <div id="canvas" class="ion-padding">
+
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>
