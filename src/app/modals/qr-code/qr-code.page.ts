@@ -16,6 +16,13 @@ export class QrCodePage implements OnInit {
     ) {}
 
     ngOnInit() {
+
+      let color: string = '#000000'
+
+      if(localStorage.getItem('theme') === 'dark') {
+        color = '#FFFFFF';
+      }
+
         const qrCode = new QRCodeStyling({
             width: 300,
             height: 300,
@@ -23,19 +30,19 @@ export class QrCodePage implements OnInit {
             data: this.data,
             image: '/assets/icon/logo_icon.png',
             dotsOptions: {
-                color: '#000000',
+                color: color,
                 type: 'dots',
             },
             cornersSquareOptions: {
                 type: 'extra-rounded',
-                color: '#000000',
+                color: color,
             },
             cornersDotOptions: {
                 type: 'dot',
                 color: '#3880ff',
             },
             backgroundOptions: {
-                color: '#FFFFFF',
+                color: 'transparent',
             },
             imageOptions: {
                 crossOrigin: 'anonymous',
